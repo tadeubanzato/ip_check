@@ -18,9 +18,9 @@ Under security and generate the 2FA code for the API
 def send_mail(current_ip):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
-    sender_email = "tadeubanzato@gmail.com"  # Enter your address
-    receiver_email = "tadeubanzato@gmail.com"  # Enter receiver address
-    password = "ivdtsmtqjbdwibzm"
+    sender_email = "email@gmail.com"  # Enter your address
+    receiver_email = "email@gmail.com"  # Enter receiver address
+    password = "<< PASSWORD FROM GOOGLE >>"
 
     msg = EmailMessage()
     msg.set_content(f'Hi,\n\nYour IP has been updated by your ISP.\nNew IP: {current_ip}\n\nRemember to update your Godaddy DNS')
