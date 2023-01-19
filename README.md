@@ -22,20 +22,18 @@ https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4O9FsLO4KIpWFl7veDJgjy
 def send_mail(current_ip):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
-    sender_email = "email_sender@gmail.com"  # Enter your address
-    receiver_email = "email_receiver@gmail.com"  # Enter receiver address
-    password = "<< FROM ACCOUNT APP INFORMATION >>"
+    password = os.environ.get("gmail_pass")
 
     msg = EmailMessage()
     msg.set_content(f'Hi,\n\nYour IP has been updated by your ISP.\nNew IP: {current_ip}\n\nRemember to update your Godaddy DNS')
     msg['Subject'] = 'ISP updated your IP'
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
+    msg['From'] = os.environ.get('from_email')
+    msg['To'] = os.environ.get('to_email')
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email, password)
-        server.send_message(msg, from_addr=sender_email, to_addrs=receiver_email
+        server.send_message(msg, from_addr=sender_email, to_addrs=receiver_email)
 ```
 
 ## Cron Job
