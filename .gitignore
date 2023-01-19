@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-ip_info.json
 
 # C extensions
 *.so
