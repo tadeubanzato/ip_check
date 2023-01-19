@@ -1,5 +1,19 @@
 ## Dependencies
-`pip3 install requests`
+This repository uses Python3 and Requests to get the current WAN IP data.
+Install requests using the command `pip3 install requests`
+
+## Dotenv for credentials
+I also added a DOTENV adition to script so I do not share my current credentials live.
+Refer to `.env-sample` file in the repository but essentially this file contains the emails information and the password acquired from the link below on Email Delivery session below.
+
+```
+from_email = sender-email@gmail.com
+to_email = receiver-email@gmail.com
+gmail_pass = <<PASS FROM GOOGLE>>
+
+```
+
+> Don't forget to change the `.env-sample` file name to `.env` only or create another file called `.env`
 
 ## JSON Swagger
 
