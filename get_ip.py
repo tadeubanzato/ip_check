@@ -8,6 +8,8 @@ import smtplib, ssl
 from email.message import EmailMessage
 import time
 from datetime import datetime
+import os
+from dotenv import load_dotenv
 
 """
 To enable email delivery go to the following link:
@@ -18,15 +20,15 @@ Under security and generate the 2FA code for the API
 def send_mail(current_ip):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
-    sender_email = "email@gmail.com"  # Enter your address
-    receiver_email = "email@gmail.com"  # Enter receiver address
-    password = "<< PASSWORD FROM GOOGLE >>"
+    password = os.environ.get("gmail_pass")
+    # sender_email = os.environ.get("from_email")
+    # receiver_email = os.environ.get("to_email")
 
     msg = EmailMessage()
     msg.set_content(f'Hi,\n\nYour IP has been updated by your ISP.\nNew IP: {current_ip}\n\nRemember to update your Godaddy DNS')
     msg['Subject'] = 'ISP updated your IP'
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
+    msg['From'] = os.environ.get('from_email')
+    msg['To'] = os.environ.get('to_email')
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
@@ -41,6 +43,7 @@ def ip_check():
 
 if __name__ == '__main__':
 
+    load_dotenv()
     current_ip = ip_check()
 
     f = open('ip_info.json')
