@@ -19,10 +19,10 @@ Under security and generate the 2FA code for the API
 
 def send_mail(current_ip):
     port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
-    password = os.environ.get("gmail_pass")
-    sender_email = os.environ.get("from_email")
-    receiver_email = os.environ.get("to_email")
+    smtp_server = 'smtp.gmail.com'
+    password = os.environ.get('gmail_pass')
+    sender_email = os.environ.get('from_email')
+    receiver_email = os.environ.get("to_email").split(',') #['8577075969@tmomail.net', 'tadeubanzato@gmail.com']
 
     msg = EmailMessage()
     msg.set_content(f'Hi,\n\nYour IP has been updated by your ISP.\nNew IP: {current_ip}\n\nRemember to update your Godaddy DNS')
