@@ -37,7 +37,7 @@ def start_driver():
     ## Function to initiate webdriver based on device
 
     ua = UserAgent(browsers=['safari', 'firefox'])
-    
+
     options = Options()
     options.add_argument("--disable-gpu")
     options.add_argument('--headless')
