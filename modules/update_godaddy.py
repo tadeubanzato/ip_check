@@ -23,6 +23,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 import platform
 # from dotenv import load_dotenv
 from requests import get
+from fake_useragent import UserAgent
+
 # load_dotenv()
 
 # def ip_check():
@@ -34,13 +36,17 @@ def start_driver():
     osID = platform.system().lower()
     ## Function to initiate webdriver based on device
 
+    ua = UserAgent(browsers=['safari', 'firefox'])
+    
     options = Options()
     options.add_argument("--disable-gpu")
     options.add_argument('--headless')
     options.add_argument("--no-sandbox")
-    options.add_argument("enable-automation")
-    options.add_argument("--disable-infobars")
-    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument(f"user-agent={ua.random}")
+    # options.add_argument("enable-automation")
+    # options.add_argument("--disable-infobars")
+    # options.add_argument("--disable-dev-shm-usage")
+
 
     ## When on mac load MAC DRIVER
     ## Update where you added your chromedriver
