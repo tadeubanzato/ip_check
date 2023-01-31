@@ -45,8 +45,8 @@ def start_driver():
     ## When on mac load MAC DRIVER
     ## Update where you added your chromedriver
     if 'darwin' in osID:
-        return uc.Chrome()
-        # return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver", options=options)
+        # return uc.Chrome()
+        return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver", options=options)
         # return webdriver.Chrome(ChromeDriverManager().install())
         # return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver")
 
@@ -71,22 +71,26 @@ def godaddy(current_ip):
     username = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='username']"))).send_keys(os.environ.get('daddy-user'))
     password = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='password']"))).send_keys(os.environ.get('daddy-pass'))
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='submitBtn']"))).click()
+    try:
+        error = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='browser-error-modal']"))).text
+        print(error)
+        driver.close()
+    except:
+        WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@aria-label='Edit']"))).click()
+        x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']")))
+        # WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).send_keys('test')
+        # x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).set_attribute("value", "your value")
+        y = x.get_attribute('value')
+        if current_ip not in y:
+            print(f'Updating Godaddy')
 
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@aria-label='Edit']"))).click()
-    x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']")))
-    # WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).send_keys('test')
-    # x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).set_attribute("value", "your value")
-    y = x.get_attribute('value')
-    if current_ip not in y:
-        print(f'Updating Godaddy')
+            for i in y:
+                x.send_keys(Keys.BACKSPACE)
 
-        for i in y:
-            x.send_keys(Keys.BACKSPACE)
+            x.send_keys(ip_check())
+            # x.send_keys('50.47.92.132')
 
-        x.send_keys(ip_check())
-        # x.send_keys('50.47.92.132')
-
-        WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()
-    else:
-        print(f'Godaddy IP is the same')
-    driver.close()
+            WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()
+        else:
+            print(f'Godaddy IP is the same')
+        driver.close()
