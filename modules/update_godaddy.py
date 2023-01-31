@@ -21,15 +21,14 @@ from selenium import webdriver
 import os
 from webdriver_manager.chrome import ChromeDriverManager
 import platform
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from requests import get
+# load_dotenv()
 
-load_dotenv()
-
-def ip_check():
-    # data['ip-info']['old'] = get('https://api.ipify.org').content.decode('utf8')
-    ip_now = get('https://api.ipify.org').content.decode('utf8')
-    return ip_now
+# def ip_check():
+#     # data['ip-info']['old'] = get('https://api.ipify.org').content.decode('utf8')
+#     ip_now = get('https://api.ipify.org').content.decode('utf8')
+#     return ip_now
 
 def start_driver():
     osID = platform.system().lower()
@@ -63,7 +62,7 @@ def start_driver():
         return webdriver.Chrome(executable_path="DIRECTION TO - chromedriver.exe", options=options)
 
 
-def godaddy():
+def godaddy(current_ip):
     # driver = start_driver()
     driver = uc.Chrome()
     driver.get('https://dcc.godaddy.com/manage/okame.xyz/dns')
@@ -71,16 +70,21 @@ def godaddy():
     password = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='password']"))).send_keys(os.environ.get('daddy-pass'))
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='submitBtn']"))).click()
 
-
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@aria-label='Edit']"))).click()
     x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']")))
     # WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).send_keys('test')
     # x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).set_attribute("value", "your value")
     y = x.get_attribute('value')
-    for i in y:
-        x.send_keys(Keys.BACKSPACE)
+    if current_ip not in y:
+        print(f'Updating Godaddy')
 
-    x.send_keys(ip_check())
-    # x.send_keys('50.47.92.132')
+        for i in y:
+            x.send_keys(Keys.BACKSPACE)
 
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()
+        x.send_keys(ip_check())
+        # x.send_keys('50.47.92.132')
+
+        WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()
+    else:
+        print(f'Godaddy IP is the same')
+    driver.close()
