@@ -37,10 +37,10 @@ def start_driver():
 
     options = Options()
     options.add_argument("--disable-gpu")
-    # options.add_argument("--no-sandbox")
-    # options.add_argument("enable-automation")
-    # options.add_argument("--disable-infobars")
-    # options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument("enable-automation")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-dev-shm-usage")
 
     ## When on mac load MAC DRIVER
     ## Update where you added your chromedriver
@@ -63,23 +63,24 @@ def start_driver():
         return webdriver.Chrome(executable_path="DIRECTION TO - chromedriver.exe", options=options)
 
 
-# driver = start_driver()
-driver = uc.Chrome()
-driver.get('https://dcc.godaddy.com/manage/okame.xyz/dns')
-username = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='username']"))).send_keys(os.environ.get('daddy-user'))
-password = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='password']"))).send_keys(os.environ.get('daddy-pass'))
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='submitBtn']"))).click()
+def godaddy():
+    # driver = start_driver()
+    driver = uc.Chrome()
+    driver.get('https://dcc.godaddy.com/manage/okame.xyz/dns')
+    username = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='username']"))).send_keys(os.environ.get('daddy-user'))
+    password = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='password']"))).send_keys(os.environ.get('daddy-pass'))
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='submitBtn']"))).click()
 
 
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@aria-label='Edit']"))).click()
-x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']")))
-# WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).send_keys('test')
-# x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).set_attribute("value", "your value")
-y = x.get_attribute('value')
-for i in y:
-    x.send_keys(Keys.BACKSPACE)
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@aria-label='Edit']"))).click()
+    x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']")))
+    # WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).send_keys('test')
+    # x = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@placeholder='XX.XX.XX.XX']"))).set_attribute("value", "your value")
+    y = x.get_attribute('value')
+    for i in y:
+        x.send_keys(Keys.BACKSPACE)
 
-x.send_keys(ip_check())
-# x.send_keys('50.47.92.132')
+    x.send_keys(ip_check())
+    # x.send_keys('50.47.92.132')
 
-# WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()

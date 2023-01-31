@@ -10,6 +10,7 @@ import time
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from modules.update_godaddy import *
 
 """
 To enable email delivery go to the following link:
@@ -51,7 +52,6 @@ if __name__ == '__main__':
 
     ## Check if old and new ips are the different
     if data['ip-info']['latest'] != current_ip:
-
         print('IP was updated by ISP')
         data['ip-info']['latest'] = current_ip
         data['ip-info']['timestamp'] = time.time()
@@ -61,5 +61,6 @@ if __name__ == '__main__':
             json.dump(data, f, ensure_ascii=False, indent=4)
 
         send_mail(current_ip)
+        godaddy()
     else:
         print('IP still the same')
