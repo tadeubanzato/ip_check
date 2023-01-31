@@ -45,7 +45,8 @@ def start_driver():
     ## When on mac load MAC DRIVER
     ## Update where you added your chromedriver
     if 'darwin' in osID:
-        return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver", options=options)
+        return uc.Chrome()
+        # return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver", options=options)
         # return webdriver.Chrome(ChromeDriverManager().install())
         # return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver")
 
@@ -64,8 +65,8 @@ def start_driver():
 
 
 def godaddy(current_ip):
-    # driver = start_driver()
-    driver = uc.Chrome()
+    driver = start_driver()
+    # driver = uc.Chrome()
     driver.get('https://dcc.godaddy.com/manage/okame.xyz/dns')
     username = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='username']"))).send_keys(os.environ.get('daddy-user'))
     password = WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='password']"))).send_keys(os.environ.get('daddy-pass'))
