@@ -31,21 +31,6 @@ from fake_useragent import UserAgent
 #     # data['ip-info']['old'] = get('https://api.ipify.org').content.decode('utf8')
 #     ip_now = get('https://api.ipify.org').content.decode('utf8')
 #     return ip_now
-def selenium_setup():
-  options = uc.ChromeOptions()
-  options.add_argument("--headless")
-  options.add_argument('whitelisted-ips')
-  options.add_argument("no-sandbox")
-  options.add_argument("disable-dev-shm-usage")
-  options.add_argument("--disable-extensions")
-  options.add_argument("enable-automation")
-  options.add_argument("--disable-browser-side-navigation")
-  options.add_argument("--disable-web-security")
-  options.add_argument("--disable-dev-shm-usage")
-  options.add_argument("--disable-infobars")
-  options.add_argument("--disable-gpu")
-  self.driver = uc.Chrome(version_main=92, options=options)
-  self.driver.set_page_load_timeout(60)
 
 
 def start_driver():
@@ -59,16 +44,16 @@ def start_driver():
     options.add_argument('--headless')
     options.add_argument("--no-sandbox")
     options.add_argument(f"user-agent={ua.random}")
-    # options.add_argument("enable-automation")
-    # options.add_argument("--disable-infobars")
-    # options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("enable-automation")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-dev-shm-usage")
 
 
     ## When on mac load MAC DRIVER
     ## Update where you added your chromedriver
     if 'darwin' in osID:
-        # return uc.Chrome()
-        return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver", options=options)
+        return uc.Chrome()
+        # return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver", options=options)
         # return webdriver.Chrome(ChromeDriverManager().install())
         # return webdriver.Chrome(executable_path="/opt/homebrew/bin/chromedriver")
 
@@ -78,8 +63,7 @@ def start_driver():
     ## When on linux load LINUX DRIVER
     ## Update where you added your chromedriver
     if 'linux' in osID:
-        # return webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
-        return selenium_setup()
+        return webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
 
     ## When on linux load LINUX DRIVER
     ## Update where you added your chromedriver
