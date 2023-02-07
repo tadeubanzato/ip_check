@@ -26,7 +26,6 @@ from requests import get
 import os
 
 # load_dotenv()
-
 # def ip_check():
 #     # data['ip-info']['old'] = get('https://api.ipify.org').content.decode('utf8')
 #     ip_now = get('https://api.ipify.org').content.decode('utf8')
