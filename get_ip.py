@@ -6,10 +6,10 @@ from requests import get
 import json
 import time
 from datetime import datetime
-import os
 from dotenv import load_dotenv
 from modules.update_godaddy import *
 from modules.email import *
+import os
 
 def ip_check():
     # data['ip-info']['old'] = get('https://api.ipify.org').content.decode('utf8')
