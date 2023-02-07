@@ -1,3 +1,7 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 def send_mail(current_ip):
     port = 465  # For SSL
     smtp_server = 'smtp.gmail.com'
