@@ -5,7 +5,6 @@
 from requests import get
 import json
 import smtplib, ssl
-from email.message import EmailMessage
 import time
 from datetime import datetime
 import os
