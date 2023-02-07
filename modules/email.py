@@ -1,8 +1,12 @@
 import os
 import smtplib, ssl
 from email.message import EmailMessage
-# from dotenv import load_dotenv
-# load_dotenv()
+
+"""
+To enable email delivery go to the following link:
+https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4O9FsLO4KIpWFl7veDJgjyfNA-2rPxmvgVm9E5NnlcK3kogsLF99FlMeGHUXDVorvZVuC1gYpsZR3mSk8Oy5CXqG7g9UA
+Under security and generate the 2FA code for the API
+"""
 
 def send_mail(current_ip):
     port = 465  # For SSL

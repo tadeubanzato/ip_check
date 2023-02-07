@@ -25,13 +25,6 @@ import undetected_chromedriver as uc
 from requests import get
 import os
 
-# load_dotenv()
-# def ip_check():
-#     # data['ip-info']['old'] = get('https://api.ipify.org').content.decode('utf8')
-#     ip_now = get('https://api.ipify.org').content.decode('utf8')
-#     return ip_now
-
-
 def start_driver():
     osID = platform.system().lower()
     ## Function to initiate webdriver based on device
