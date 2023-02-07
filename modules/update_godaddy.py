@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# get_ip.py
+# update_godaddy.py
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -16,14 +16,14 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.select import Select
-import undetected_chromedriver as uc
 from selenium import webdriver
-import os
 from webdriver_manager.chrome import ChromeDriverManager
 import platform
 # from dotenv import load_dotenv
-from requests import get
 from fake_useragent import UserAgent
+import undetected_chromedriver as uc
+from requests import get
+import os
 
 # load_dotenv()
 
