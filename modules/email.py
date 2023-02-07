@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# email.py
+
 import os
 import smtplib, ssl
 from email.message import EmailMessage
