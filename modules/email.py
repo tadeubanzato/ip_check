@@ -1,4 +1,5 @@
-import os
+# import os
+import smtplib, ssl
 from email.message import EmailMessage
 # from dotenv import load_dotenv
 # load_dotenv()

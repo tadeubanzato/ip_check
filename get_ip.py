@@ -4,7 +4,6 @@
 
 from requests import get
 import json
-import smtplib, ssl
 import time
 from datetime import datetime
 import os
