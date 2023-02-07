@@ -62,7 +62,8 @@ def start_driver():
     ## When on linux load LINUX DRIVER
     ## Update where you added your chromedriver
     if 'linux' in osID:
-        return webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
+        # return webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
+        return uc.Chrome()
 
     ## When on linux load LINUX DRIVER
     ## Update where you added your chromedriver
@@ -99,4 +100,4 @@ def godaddy(current_ip):
             WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH,".//*[@id='btnRecordSave']"))).click()
         else:
             print(f'Godaddy IP is the same')
-        driver.close()
+        driver.quit()
